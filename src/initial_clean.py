@@ -10,6 +10,8 @@ class DataFilter(object):
         self.self = self
         self.df = df.copy()
         self.clear_less_than_16_valid_scores()
+        self.map_over_str_values()
+        self.convert_to_float_and_int()
     
     def clear_less_than_16_valid_scores(self):
         '''
@@ -18,28 +20,62 @@ class DataFilter(object):
         '''
         self.df = self.df[self.df['num_valid_scores'] != '< 16']
         return self.df
+
+    def map_over_str_values(self):
+        '''
+        replaces '- -' string with a zero
+        '''
+        self.df = self.df.replace(['- -'], 0)
+        self.df = self.df.fillna(0)
+        return self.df
+
+    def convert_to_float_and_int(self):
+        '''
+        Columns with numerical data converted to floats and integers
+        '''
+        self.df['num_total_rec'] = self.df['num_total_rec'].astype(int, errors='ignore')
+        self.df['num_valid_scores'] = self.df['num_valid_scores'].astype(int, errors='ignore')
+        self.df['num_no_scores'] = self.df['num_no_scores'].astype(int, errors='ignore')
+        self.df['participation_rate'] = self.df['participation_rate'].astype(float, errors='ignore')
+        self.df['mean_scale_score_19'] = self.df['mean_scale_score_19'].astype(int, errors='ignore')
+        self.df['std_scale_score_19'] = self.df['std_scale_score_19'].astype(int, errors='ignore')
+        self.df['mean_scale_score_18'] = self.df['mean_scale_score_18'].astype(int, errors='ignore')
+        self.df['num_pme_19'] = self.df['num_pme_19'].astype(int, errors='ignore')
+        self.df['percent_pme_19'] = self.df['percent_pme_19'].astype(float, errors='ignore')
+        self.df['num_ae_19'] = self.df['num_ae_19'].astype(int, errors='ignore')
+        self.df['percent_ae_19'] = self.df['percent_ae_19'].astype(float, errors='ignore')
+        self.df['num_me_19'] = self.df['num_me_19'].astype(int, errors='ignore')
+        self.df['percent_me_19'] = self.df['percent_me_19'].astype(float, errors='ignore')
+        self.df['num_ee_19'] = self.df['num_ee_19'].astype(int, errors='ignore')
+        self.df['percent_ee_19'] = self.df['percent_ee_19'].astype(float, errors='ignore')
+        self.df['num_me_or_ee_19'] = self.df['num_me_or_ee_19'].astype(int, errors='ignore')
+        self.df['percent_me_or_ee_19'] = self.df['percent_me_or_ee_19'].astype(float, errors='ignore')
+        self.df['num_me_or_ee_18'] = self.df['num_me_or_ee_18'].astype(int, errors='ignore')
+        self.df['percent_me_or_ee_18'] = self.df['percent_me_or_ee_18'].astype(float, errors='ignore')
+        self.df['change_in_me_or_ee'] = self.df['change_in_me_or_ee'].astype(float, errors='ignore')
+        return self.df
     
     def exceeded_expectations(self):
-        self.df = self.df[self.df['num_ee_19'] != '- -']
+        self.df = self.df[self.df['num_ee_19'] != 0]
         return self.df
 
     def met_expectations(self):
-        self.df = self.df[self.df['num_me_19'] != '- -']
+        self.df = self.df[self.df['num_me_19'] != 0]
         return self.df
     
     def met_or_exceeded_expectations(self):
         '''
         returns rows with data in the met or exceeded expectations 2019 column
         '''
-        self.df = self.df[self.df['num_me_or_ee_19'] != '- -']
+        self.df = self.df[self.df['num_me_or_ee_19'] != 0]
         return self.df
     
     def approached_expectations(self):
-        self.df = self.df[self.df['num_ae_19'] != '- -']
+        self.df = self.df[self.df['num_ae_19'] != 0]
         return self.df
     
     def partially_met_expectations(self):
-        self.df = self.df[self.df['num_pme_19'] != '- -']
+        self.df = self.df[self.df['num_pme_19'] != 0]
         return self.df
     
     def filter_for_state(self):
@@ -77,8 +113,8 @@ class DataFilter(object):
 
 if __name__ == "__main__":
     test = DataFilter(df)
-    test.filter_for_school()
-    print(test.df.head())
+    #test.filter_for_school()
+    print(test.df['num_total_rec'].unique())
     #me_or_ee = test.met_or_exceeded_expectations().head()
     #print(me_or_ee.head())
     #df['num_valid_scores'] = df['num_valid_scores'].map({'< 16': NaN})

@@ -16,25 +16,26 @@ def filter_met_or_exceed_expectations_schools(obj):
     obj.filter_for_school()
     obj.filter_out_all_grades()
     return obj
+    
 
-def participation_rate(obj):
-    pass
-    obj = obj.df.copy()
-    obj.df.drop(columns = [
-                'level',
-                'district_code',
-                'district_name',
-                'school_code',
-                'num_total_rec',
-                'num_no_scores',
-                'mean_scale_score_19', #what am I doing])
+def districts_with_ten_or_more_results(obj):
+    pass #maybe come back to
+    obj = obj.df.groupby('district_name').count()
+    obj = obj.query('level >= 10')
+    return obj
 
 
 if __name__ == "__main__":
-    high_perf_schools = DataFilter(df)
-    filter_high_perf_schools(high_perf_schools)
-    passing_schools = DataFilter(df)
-    filter_met_or_exceed_expectations_schools(passing_schools)
-    passing_schools.df.drop()
+    test = DataFilter(df)
+    #districts_with_ten_or_more_results(test)
+    #print(test.df.shape)
+    #high_perf_schools = DataFilter(df)
+    #filter_high_perf_schools(high_perf_schools)
+    #high_perf_dist_count = high_perf_schools.df.groupby('district_name').count()
+    #print(high_perf_schools.df.info())
+    #passing_schools = DataFilter(df)
+    #filter_met_or_exceed_expectations_schools(passing_schools)
+    #participation_rate(passing_schools)
+    #passing_schools.df['participation_rate'].unique()
     #print(passing_schools.df.shape)
     #print(high_perf_schools.df['participation_rate'].shape)
