@@ -26,12 +26,9 @@ df_s_and_d.rename(columns={'Unnamed: 19': 'num_ee_19', 'Unnamed: 20': 'percent_e
 df_s_and_d.rename(columns={'Unnamed: 21': 'num_me_or_ee_19', 'Unnamed: 22': 'percent_me_or_ee_19'}, inplace=True)
 df_s_and_d.rename(columns={'Unnamed: 23': 'num_me_or_ee_18', 'Unnamed: 24': 'percent_me_or_ee_18'}, inplace=True)
 df_s_and_d.rename(columns={'Unnamed: 25': 'change_in_me_or_ee'}, inplace=True)
-#cleaning
-#df_s_and_d.drop([0, 4], inplace=True)
-#df_s_and_d = df_s_and_d[df_s_and_d['num_valid_scores'] >= 16 ]
-#df_s_and_d[58:64]['num_valid_scores']
+
 print(df_s_and_d.columns)
-#print(df_s_and_d[0:3])
+
 """ 
 I need to figure out how to delete the header rows with all the NaN values.
 print(df.iloc[0:12]) shows first data value of -0.5 in last column.
@@ -39,10 +36,4 @@ print(df.iloc[0:12]) shows first data value of -0.5 in last column.
 df_s_and_d.drop([0,1,2,3,4,5,6,7,8,9,10], axis=0, inplace=True)
 #print(df_s_and_d[:3])
 
-""" 
-Export to CSV for load into pgserv and psycopg2
-compression_opts = dict(method='zip',
-                        archive_name='../data/school_and_district.zip')
-df_s_and_d.to_csv('../data/school_and_district.csv',
-                compression=compression_opts)
-"""
+

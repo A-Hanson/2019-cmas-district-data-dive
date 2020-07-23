@@ -1,5 +1,5 @@
 import pandas as pd
-from cap_one_initial_dive import df_s_and_d as df
+from src.cap_one_initial_dive import df_s_and_d as df
 
 class DataFilter(object):
     '''
@@ -113,8 +113,10 @@ class DataFilter(object):
 
 if __name__ == "__main__":
     test = DataFilter(df)
-    #test.filter_for_school()
-    print(test.df['num_total_rec'].unique())
+    test.filter_for_district()
+    test.filter_for_all_grades()
+    print(test.df['participation_rate'].describe())
+    print(test.df['mean_scale_score_19'].describe())
     #me_or_ee = test.met_or_exceeded_expectations().head()
     #print(me_or_ee.head())
     #df['num_valid_scores'] = df['num_valid_scores'].map({'< 16': NaN})
