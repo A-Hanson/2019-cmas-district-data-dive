@@ -10,26 +10,46 @@ How a school performs on these tests affects how they are [graded by the CDE](ht
 
 **Personal bias:** I have taught in mainly low-performing schools. My very first year teaching was in a school that was being phased out due to its low performance. It is difficult to get buy-in from the students to perform well when there is no actual application to their life. How can I tell Student X that this is important to him? I know it isn't. It's important to my boss, who then makes it important in my life. 
 
+---
+
 ## Data
 The CDE releases the yearly results on their [website](https://www.cde.state.co.us/assessment/cmas-dataandresults-2019). I downloaded the 2019 CMAS Science District and School Overall Results in an excel file.
+
+*Snapshot of the data the excel format:*
+<p align="center">
+    <img src="images/raw_excel_data_1.png">
+</p>
+
+The original dataset has more than 4,700 rows of data on State, District, and School level data. Certain data was obsurced using '< 16' or '- -' for student privacy if there were less than 16 values. 
+
+*Snapshot of the data the excel format with '< 16' values:*
+<p align="center">
+    <img src="images/raw_excel_data_2.png">
+</p>
+
+Most of the records include information such as:
+* Participation Rate
+* Mean Scale Score for 2019 and 2018
+* Change in Percent Met or Exceeded Expectations from 2018 to 2019
+* Number and Percentage of Scores in each of the following categories:
+
+<center>
+
+| Partially Met Expectations | Approached Expectations | Met Expectations | Exceeded Expectations |
+| -------------------------- | ----------------------- | ---------------- | ------------ |
+
+</center>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 *Snapshot of the School District Level data:*
 <p align="center">
     <img src="images/district_raw_data_snapshot.png">
 </p>
 
-The original dataset has more than 4,700 rows of data on State, District, and School level data. Certain data was obsurced using '< 16' or '- -' for student privacy if there were less than 16 values. Most of the records include information such as:
-* Participation Rate
-* Mean Scale Score for 2019 and 2018
-* Number and Percentage of Scores in each of the following categories:
-    * Partially Met Expectations
-    * Approached Expectations
-    * Met Expectations
-    * Exceeded Expectations
-    * Met or Exceeded Expectations
-* Change in Percent Met or Exceeded Expectations from 2018 to 2019
 
-
+---
 
 # Exploratory Data Analysis
 ## Looking for patterns in the data
@@ -44,6 +64,8 @@ Next, I set out to explore the relationship between a district's participation r
 <p align="center">
     <img src="images/district_participation_mean_scores.png">
 </p>
+
+---
 
 # Binomial Tests
 
@@ -62,20 +84,27 @@ I perfomed a Binomial Test using the Mean Scale Score for each district, passing
 </p>
 
 *My p-value returned at 1.0, leading me to reject my null hypothesis.*
+<p>&nbsp;</p>
 
+---
+
+<p>&nbsp;</p>
 Curious now what a reasonable probability might be, I set out to find the probability that I could fail to reject my null hypothesis.
 <p align="center">
     <img src="https://media.giphy.com/media/lTdjcxRUQXeqPfMtpc/giphy.gif">
 </p>
+<p>&nbsp;</p>
 
+---
 
+<p>&nbsp;</p>
 
-At a probability of **0.019**, I had a p-value of 0.199 and was able to reject my null hypothesis.
+At a probability of **0.019**, I had a **p-value of 0.199** and was able to reject my null hypothesis.
 <p align="center">
     <img src="images/FinalBinomialTest.png">
 </p>
 
-Who were these high performing districts?
+#### Who were these high performing districts?
 * Cheyenne Mountain 12
 * Swink 33
 * Ridgeway R-2
@@ -84,4 +113,6 @@ Who were these high performing districts?
 
 # Next Steps
 Given more time I would like to expand this initial dive into the following areas:
-* Using the Binomial test on the 
+* Use the passing value of 50% or more Met or Exceeded expectations on the district level data
+* Investigate using the Binomial test on the the individual schools' mean scores
+* Compare the schools within each district to one another

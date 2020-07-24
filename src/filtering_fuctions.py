@@ -48,10 +48,24 @@ def find_name_met_or_exceeds_district(obj):
     k = k['district_name']
     return k
     
+def export_state_csv(obj):
+    obj.filter_for_state()
+    return obj.df.to_csv('../data/state_data.csv')
+
+def export_district_csv(obj):
+    obj.filter_for_district()
+    return obj.df.to_csv('../data/district_data.csv')
+
+def export_school_csv(obj):
+    obj.filter_for_school()
+    return obj.df.to_csv('../data/school_data.csv')
 
 if __name__ == "__main__":
     test = DataFilter(df)
-    print(find_name_met_or_exceeds_district(test))
+    export_district_csv(test)
+    export_school_csv(test)
+    export_state_csv(test)
+    #print(find_name_met_or_exceeds_district(test))
     #print(binomial_test_graph(test))
     #print(district_scores_all_grades(test))
     #n = find_num_trials_district(test)
