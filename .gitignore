@@ -1,3 +1,7 @@
 *.xcel
 *.pdf
 *.ipynb_checkpoints
+__pycache__/
+.pipeline
+.psycopg2_import
+.DS_Store

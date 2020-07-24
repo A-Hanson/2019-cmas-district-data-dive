@@ -40,7 +40,48 @@ To get an idea if there were any correlations between participation rate and the
 
 
 ## Participation Rate and Test Scores
-Next, I set out to explore the relationship between a district's participation rate and their test scores. I set each district's All School Participation Rate against their Mean Scaled Score. In order to see clearly which districts were performing well, I set a horizontal line at the minimum overall score for the Met Expectations category.
+Next, I set out to explore the relationship between a district's participation rate and their test scores. I set each district's All School Participation Rate against their Mean Scaled Score. In order to see clearly which districts were performing well, I set a horizontal line at the minimum overall score (650) for the Met Expectations category.
 <p align="center">
     <img src="images/district_participation_mean_scores.png">
 </p>
+
+# Binomial Tests
+
+Seeing the graph showing so few districts having their average score place at or above the bench mark for meeting grade level expectations got me thinking about just the scores. 
+What we know:
+* There are four categories in which scores can fall
+* To be considered at or above grade level, students must score in the Met or Exceeded Expectations category.
+    * 650 or higher
+
+What we assume:
+* If the test is representative of the population, then 50 percent of districts should meet or exceed expectations.
+
+I perfomed a Binomial Test using the Mean Scale Score for each district, passing if it was greater than or equal to 650. My null hypothesis was that the **probability of a district passing or not being 0.5**. I set an **alpha of 0.2.**
+<p align="center">
+    <img src="images/FiftyFiftyBinomialTest.png">
+</p>
+
+*My p-value returned at 1.0, leading me to reject my null hypothesis.*
+
+Curious now what a reasonable probability might be, I set out to find the probability that I could fail to reject my null hypothesis.
+<p align="center">
+    <img src="https://media.giphy.com/media/lTdjcxRUQXeqPfMtpc/giphy.gif">
+</p>
+
+
+
+At a probability of **0.019**, I had a p-value of 0.199 and was able to reject my null hypothesis.
+<p align="center">
+    <img src="images/FinalBinomialTest.png">
+</p>
+
+Who were these high performing districts?
+* Cheyenne Mountain 12
+* Swink 33
+* Ridgeway R-2
+* Steamboat Springs RE-2
+* Idalia RJ-3
+
+# Next Steps
+Given more time I would like to expand this initial dive into the following areas:
+* Using the Binomial test on the 
